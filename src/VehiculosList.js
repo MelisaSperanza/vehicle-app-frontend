@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {Link} from "react-router-dom";
 
 function VehiculosList() {
   const [vehiculos, setVehiculos] = useState([]);
@@ -100,7 +101,11 @@ const ano = parseInt(v.modelYear || 0);
        <tbody>
   {vehiculosFiltrados.map((v) => (
     <tr key={v.vin}>
-      <td>{v.vin}</td>
+      <td>
+        <Link to={`/vehiculos/${v.vin}`}>
+          {v.vin}
+        </Link>
+      </td>
       <td>{v.licensePlate}</td>
       <td>{v.reservationStatus}</td>
       <td>{v.indieVehicleModel}</td>
