@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 function VehiculoDetalle() {
 
@@ -17,6 +18,11 @@ function VehiculoDetalle() {
       .then(data => {
         const encontrado = data.find(v => v.vin === vin);
         setVehiculo(encontrado);
+
+        if (!encontrado){
+            setError("Vehículo no encontrado");
+        }
+
       })
       .catch(err => {
         setError(err.message);
@@ -49,7 +55,8 @@ function VehiculoDetalle() {
       <p><b>Año:</b> {vehiculo.modelYear}</p>
       <p><b>País actual:</b> {vehiculo.currentCountry}</p>
       <p><b>Precio:</b> {vehiculo.livePriceEurInclVat} EUR</p>
-
+        <br />
+        <Link to="/vehiculos">← Volver a la lista</Link>
     </div>
   );
 }
