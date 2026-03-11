@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import VehiculosList from "./VehiculosList";
-import VehiculoDetalle from "./VehiculoDetalle";
+import VehiculosList from "./pages/VehiculosList";
+import VehiculoDetalle from "./pages/VehiculoDetalle";
 
 function App() {
   return (

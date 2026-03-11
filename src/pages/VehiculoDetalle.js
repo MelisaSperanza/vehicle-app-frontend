@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+//import { useParams } from "react-router-dom";
 import { useParams, Link } from "react-router-dom";
+import { getVehiculoByVin } from "../services/vehiculosApi";
 
 function VehiculoDetalle() {
 
@@ -9,7 +10,8 @@ function VehiculoDetalle() {
   const [vehiculo, setVehiculo] = useState(null);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
+  //useEffect inicial - borrar está en git
+/*  useEffect(() => {
     fetch("http://localhost:8080/vehiculos")
       .then(res => {
         if (!res.ok) throw new Error("Error al cargar vehículos");
@@ -27,17 +29,26 @@ function VehiculoDetalle() {
       .catch(err => {
         setError(err.message);
       });
-
+      
   }, [vin]);
+*/
+useEffect(() => {
+
+  getVehiculoByVin(vin)
+    .then(data => setVehiculo(data))
+    .catch(err => setError(err.message));
+
+}, [vin]);
+
 
   if (error) return <p style={{color:"red"}}>{error}</p>;
 
   if (!vehiculo) return <p>Cargando vehículo...</p>;
 
   return (
-    <div>
+    <div style={{padding:"20px"}}>
 
-      <h2>Detalle del Vehículo</h2>
+      <h2>Detalle del Vehículo {vehiculo.indieVehicleModel}</h2>
 
       <img
         src={vehiculo.thumbnailUrl}
