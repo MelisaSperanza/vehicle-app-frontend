@@ -9,6 +9,8 @@ function VehiculosList() {
   const [anoMinFiltro, setAnoMinFiltro] = useState("");
   const [search, setSearch] = useState(""); // búsqueda general
   const [error, setError] = useState(null);
+  const [ordenCampo, setOrdenCampo] = useState("");
+const [ordenDireccion, setOrdenDireccion] = useState("asc");
 
   // Fetch al backend
   useEffect(() => {
@@ -28,7 +30,7 @@ function VehiculosList() {
   }, []);
 
   // Filtrado
-  const vehiculosFiltrados = vehiculos.filter((v) => {
+    const vehiculosFiltrados = vehiculos.filter((v) => {
     const modelo = v.indieVehicleModel?.toLowerCase() || "";
     const pais = v.currentCountry?.toLowerCase() || "";
     const precio = parseFloat(v.livePriceEurInclVat || 0);
@@ -47,8 +49,32 @@ function VehiculosList() {
     return filtroModeloOk && filtroPaisOk && filtroPrecioOk && filtroAnoOk && filtroBusquedaOk;
   });
 
+  //ordenación añadida en v1.3:
+  const vehiculosOrdenados = [...vehiculosFiltrados].sort((a, b) => {
+
+    if (!ordenCampo) return 0;
+
+      let valorA = a[ordenCampo];
+      let valorB = b[ordenCampo];
+
+    if (ordenCampo === "livePriceEurInclVat" || ordenCampo === "modelYear") {
+      valorA = Number(valorA);
+      valorB = Number(valorB);
+    }
+
+    if (ordenCampo === "currentCountry") {
+      valorA = valorA?.toLowerCase() || "";
+      valorB = valorB?.toLowerCase() || "";
+    }
+
+    if (valorA < valorB) return ordenDireccion === "asc" ? -1 : 1;
+    if (valorA > valorB) return ordenDireccion === "asc" ? 1 : -1;
+
+  return 0;
+});
+
   // Función para imprimir solo los filtrados
-  const printFiltered = () => {
+    const printFiltered = () => {
     const printContents = document.getElementById("printArea").innerHTML;
     const originalContents = document.body.innerHTML;
 
@@ -106,6 +132,26 @@ function VehiculosList() {
         Generar Informe
       </button>
 
+    
+    <div style={{marginBottom: "10px"}}>
+
+      Ordenar por: &nbsp;
+
+      <select onChange={(e) => setOrdenCampo(e.target.value)}>
+        <option value="">---</option>
+        <option value="livePriceEurInclVat">Precio</option>
+        <option value="modelYear">Año</option>
+        <option value="currentCountry">País</option>
+      </select>
+
+      <select onChange={(e) => setOrdenDireccion(e.target.value)}>
+        <option value="asc">Ascendente</option>
+        <option value="desc">Descendente</option>
+      </select>
+
+    </div>
+
+
       {/* Tabla */}
       <div id="printArea">
         <table border="1" cellPadding="5">
@@ -129,7 +175,7 @@ function VehiculosList() {
             </tr>
           </thead>
           <tbody>
-            {vehiculosFiltrados.map((v) => (
+            {vehiculosOrdenados.map((v) => (
               <tr key={v.vin}>
                 <td>
                   <Link to={`/vehiculos/${v.vin}`}>{v.vin}</Link>
