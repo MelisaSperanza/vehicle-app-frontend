@@ -9,6 +9,8 @@ function VehiculosList() {
   const [anoMinFiltro, setAnoMinFiltro] = useState("");
 
   const [error, setError] = useState(null);
+  //El siguiente useState crea el estado de búsqueda, para v1.1
+  const [search, setSearch] = useState("");
 
   // Fetch al backend
   useEffect(() => {
@@ -29,18 +31,28 @@ function VehiculosList() {
 
   // Filtrado de la lista antes de renderizar
   const vehiculosFiltrados = vehiculos.filter((v) => {
-const modeloIndie = v.indieVehicleModel?.toLowerCase() || "";
-const pais = v.currentCountry?.toLowerCase() || "";
-const precio = parseFloat(v.livePriceEurInclVat || 0);
-const ano = parseInt(v.modelYear || 0);
-
-    const filtroModeloOk = modeloIndie.includes(modeloFiltro.toLowerCase());
-    const filtroPaisOk = pais.includes(paisFiltro.toLowerCase());
-    const filtroPrecioOk =
-      precioMaxFiltro === "" || precio <= parseFloat(precioMaxFiltro);
-    const filtroAnoOk = anoMinFiltro === "" || ano >= parseInt(anoMinFiltro);
-
-    return filtroModeloOk && filtroPaisOk && filtroPrecioOk && filtroAnoOk;
+  const modeloIndie = v.indieVehicleModel?.toLowerCase() || "";
+  const pais = v.currentCountry?.toLowerCase() || "";
+  const precio = parseFloat(v.livePriceEurInclVat || 0);
+  const ano = parseInt(v.modelYear || 0);
+  const vin = v.vin?.toLowerCase() || "";
+  const matricula = v.licensePlate?.toLowerCase() || "";
+  const filtroModeloOk = modeloIndie.includes(modeloFiltro.toLowerCase());
+  const filtroPaisOk = pais.includes(paisFiltro.toLowerCase());
+  const filtroPrecioOk =
+    precioMaxFiltro === "" || precio <= parseFloat(precioMaxFiltro);
+  const filtroAnoOk = anoMinFiltro === "" || ano >= parseInt(anoMinFiltro);
+  const filtroBusquedaOk =
+    vin.includes(search.toLowerCase()) ||
+    matricula.includes(search.toLowerCase()) ||
+    modeloIndie.includes(search.toLowerCase());
+  return (
+  filtroModeloOk &&
+  filtroPaisOk &&
+  filtroPrecioOk &&
+  filtroAnoOk &&
+  (search === "" || filtroBusquedaOk)
+  );
   });
 
   return (
@@ -74,6 +86,12 @@ const ano = parseInt(v.modelYear || 0);
           placeholder="Año mínimo"
           value={anoMinFiltro}
           onChange={(e) => setAnoMinFiltro(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Buscar VIN, matrícula o modelo..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
       </div>
 
