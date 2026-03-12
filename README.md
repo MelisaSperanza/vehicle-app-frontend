@@ -1,70 +1,153 @@
-# Getting Started with Create React App
+# Vehículos App (v1.2)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aplicación **full-stack** para la gestión y visualización de vehículos disponibles para venta.
 
-## Available Scripts
+Permite **listar, filtrar, buscar y generar informes imprimibles** de vehículos de manera interactiva.
 
-In the project directory, you can run:
+El **frontend está desarrollado en React** y el **backend en Java Spring Boot**.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# Estructura del proyecto
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Backend
 
-### `npm test`
+Carpeta:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+vehiculos-backend
 
-### `npm run build`
+Tecnologías:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Java
+- Spring Boot
+- REST API
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Endpoints principales:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+GET /vehiculos  
+→ Devuelve todos los vehículos en formato JSON.
 
-### `npm run eject`
+Extensión posible:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+GET /vehiculos/{vin}  
+→ Devuelve el detalle de un vehículo (actualmente el filtrado se realiza en el frontend).
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+DTO:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Cada vehículo se representa mediante un objeto JSON proveniente de la clase:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+VehiculoDTO
 
-## Learn More
+Branch / tag:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+v1.0
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## Frontend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Carpeta:
 
-### Analyzing the Bundle Size
+vehiculos-frontend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Tecnologías:
 
-### Making a Progressive Web App
+- React
+- React Router
+- Fetch API
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Componentes principales:
 
-### Advanced Configuration
+VehiculosList.js  
+→ Lista los vehículos, permite aplicar filtros y generar informe imprimible.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+VehiculoDetalle.js  
+→ Muestra el detalle completo de un vehículo.
 
-### Deployment
+Estado en React:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Se utiliza **useState** para manejar:
 
-### `npm run build` fails to minify
+- modeloFiltro
+- paisFiltro
+- precioMaxFiltro
+- anoMinFiltro
+- búsqueda general (search)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+La lista de vehículos se carga desde el backend y se guarda en:
+
+vehiculos
+
+Branch / tag:
+
+v1.2
+
+---
+
+# Funcionalidades
+
+## Listado y filtros
+
+Visualización de todos los vehículos en formato tabla.
+
+Filtros disponibles:
+
+- Modelo Indie
+- País
+- Precio máximo
+- Año mínimo
+
+También incluye:
+
+Búsqueda global por **VIN o matrícula**.
+
+---
+
+## Detalle de vehículo
+
+Al hacer clic en el **VIN** se abre la página de detalle.
+
+Información mostrada:
+
+- VIN
+- Matrícula
+- Modelo
+- Chasis
+- Transmisión
+- Kilometraje
+- Año
+- País actual
+- Precio
+- Imagen del vehículo
+
+Las imágenes incluyen **fallback automático** si la miniatura no carga.
+
+---
+
+## Informe imprimible
+
+La aplicación permite generar un **informe imprimible**.
+
+Características:
+
+- Solo incluye los vehículos que cumplen los filtros activos
+- Formato de tabla listo para enviar a clientes
+- Puede usarse como informe de ventas
+
+---
+
+# Detalles técnicos
+
+- Cada fila de la tabla tiene un **key único** para evitar warnings de React.
+- Las imágenes incluyen **onError fallback** a placeholder si la miniatura falla.
+- Los datos se cargan desde una **API REST en Spring Boot**.
+
+---
+
+# Cómo ejecutar el proyecto
+
+## Backend
+
+```bash
+cd vehiculos-backend
+mvn spring-boot:run
