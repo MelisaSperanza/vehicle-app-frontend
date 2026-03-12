@@ -36,3 +36,29 @@
     transform: rotate(360deg);
   }
 }
+@media print {
+  /* Ocultar inputs y botones */
+  input, button, a {
+    display: none;
+  }
+
+  /* Ajustar tabla al ancho de la página */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  table, th, td {
+    border: 1px solid black;
+  }
+
+  th, td {
+    padding: 5px;
+    text-align: left;
+  }
+
+  img {
+    max-width: 100px;
+    height: auto;
+  }
+}
