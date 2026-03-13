@@ -151,3 +151,14 @@ Características:
 ```bash
 cd vehiculos-backend
 mvn spring-boot:run
+
+## Screenshots
+
+### Vehicle List
+![Vehicle list](screenshots/list.png)
+
+### Filters
+![Filters](screenshots/filters.png)
+
+### Vehicle Detail
+![Vehicle detail](screenshots/detail.png)
