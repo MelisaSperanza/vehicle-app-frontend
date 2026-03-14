@@ -155,10 +155,20 @@ mvn spring-boot:run
 ## Screenshots
 
 ### Vehicle List
-![Vehicle list](screenshots/list.png)
+![Vehicle list](screenshots/vehiculo-list.png)
+<p align="center">
+  <img src="screenshots/vehicle-list.png" width="800">
+</p>
+
 
 ### Filters
-![Filters](screenshots/filters.png)
+![Filters](screenshots/vehiculo-filters.png)
+<p align="center">
+  <img src="screenshots/vehicle-filters.png" width="800">
+</p>
 
 ### Vehicle Detail
-![Vehicle detail](screenshots/detail.png)
+![Vehicle detail](screenshots/vehiculo-detail.png)
+<p align="center">
+  <img src="screenshots/vehicle-detail.png" width="800">
+</p>
