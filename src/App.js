@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import VehiculosList from "./pages/VehiculosList";
 import VehiculoDetalle from "./pages/VehiculoDetalle";
 
+
 function App() {
   return (
     <Router>
