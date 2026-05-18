@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "./VehiculosListB2B.css";
+//import VehiculoCard from "../components/VehiculoCard";
 
-function VehiculosList() {
+function VehiculosListB2B() {
   const [vehiculos, setVehiculos] = useState([]);
   const [modeloFiltro, setModeloFiltro] = useState("");
   const [paisFiltro, setPaisFiltro] = useState("");
@@ -10,7 +12,8 @@ function VehiculosList() {
   const [search, setSearch] = useState(""); // búsqueda general
   const [error, setError] = useState(null);
   const [ordenCampo, setOrdenCampo] = useState("");
-const [ordenDireccion, setOrdenDireccion] = useState("asc");
+  const [ordenDireccion, setOrdenDireccion] = useState("asc");
+  const [selectedVehicles, setSelectedVehicles] = useState([]);
 
   // Fetch al backend
   useEffect(() => {
@@ -84,8 +87,17 @@ const [ordenDireccion, setOrdenDireccion] = useState("asc");
     window.location.reload(); // opcional para restaurar event listeners
   };
 
+  const styles = {
+  grid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
+    gap: "16px",
+    marginTop: "16px",
+  },
+};
+
   return (
-    <div className="VehiculosList">
+    <div className="VehiculosListB2B">
       <h1>Listado de Vehículos</h1>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
@@ -151,12 +163,12 @@ const [ordenDireccion, setOrdenDireccion] = useState("asc");
 
     </div>
 
-
-      {/* Tabla */}
+        {/* Tabla */}
       <div id="printArea">
         <table border="1" cellPadding="5">
           <thead>
             <tr>
+              <th>Seleccionar</th>
               <th>VIN</th>
               <th>Matrícula</th>
               <th>Estado Reserva</th>
@@ -168,46 +180,62 @@ const [ordenDireccion, setOrdenDireccion] = useState("asc");
               <th>País Registro</th>
               <th>Año Modelo</th>
               <th>KMs</th>
-              <th>Moneda</th>
-              <th>Tipo Cambio EUR Local</th>
               <th>Precio EUR (inc. IVA)</th>
-              <th>Thumbnail</th>
             </tr>
           </thead>
+
           <tbody>
-            {vehiculosOrdenados.map((v) => (
-              <tr key={v.vin}>
-                <td>
-                  <Link to={`/vehiculos/${v.vin}`}>{v.vin}</Link>
-                </td>
-                <td>{v.licensePlate}</td>
-                <td>{v.reservationStatus}</td>
-                <td>{v.indieVehicleModel}</td>
-                <td>{v.chassisModel}</td>
-                <td>{v.transmission}</td>
-                <td>{v.currentLocation}</td>
-                <td>{v.currentCountry}</td>
-                <td>{v.registrationCountry}</td>
-                <td>{v.modelYear}</td>
-                <td>{v.kms}</td>
-                <td>{v.currency}</td>
-                <td>{v.eurLocalRate}</td>
-                <td>{v.livePriceEurInclVat}</td>
-                <td>
-                  <img
-                    src={v.thumbnailUrl}
-                    alt={v.indieVehicleModel}
-                    width="100"
-                    onError={(e) => (e.target.src = "https://placehold.co/100")}
-                  />
-                </td>
+            {vehiculosOrdenados.map((vehiculo) => (
+              <tr key={vehiculo.vin}>
+                      <td>
+                <input
+                  type="checkbox"
+                  checked={selectedVehicles.includes(vehiculo.vin)}
+                  onChange={(e) => {
+
+                    if (e.target.checked) {
+
+                      setSelectedVehicles([
+                        ...selectedVehicles,
+                        vehiculo.vin
+                      ]);
+
+                    } else {
+
+                      setSelectedVehicles(
+                        selectedVehicles.filter(
+                          (vin) => vin !== vehiculo.vin
+                        )
+                      );
+
+                    }
+
+                  }}
+                />
+              </td>
+
+                <Link to={`/vehiculos/${vehiculo.vin}`}>{vehiculo.vin}</Link>
+                <td>{vehiculo.licensePlate}</td>
+                <td>{vehiculo.reservationStatus}</td>
+                <td>{vehiculo.indieVehicleModel}</td>
+                <td>{vehiculo.chassisModel} </td>
+                <td>{vehiculo.transmission} </td>
+                <td>{vehiculo.currentLocation} </td>
+                <td>{vehiculo.currentCountry} </td>
+                <td>{vehiculo.registrationCountry} </td>
+                <td>{vehiculo.modelYear} </td>
+                <td>{vehiculo.kms} </td>
+                <td>{vehiculo.livePriceEurInclVat} € </td>
+
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+          
     </div>
+  
   );
 }
 
-export default VehiculosList;
+export default VehiculosListB2B;
