@@ -1,4 +1,4 @@
-# Vehículos App (v1.2)
+# Vehículos App (v1.3)
 
 Aplicación **full-stack** para la gestión y visualización de vehículos disponibles para venta.
 
@@ -6,169 +6,99 @@ Permite **listar, filtrar, buscar y generar informes imprimibles** de vehículos
 
 El **frontend está desarrollado en React** y el **backend en Java Spring Boot**.
 
+--
+
+Vehicle Inventory Management Platform
+
+Full stack web application for vehicle inventory management, designed for both:
+B2C marketplace browsing
+B2B sales workflows and reporting
+Built with React, Spring Boot and PostgreSQL.
+
+Features
+
+B2C Marketplace
+Vehicle card marketplace view
+Vehicle search
+Responsive React card layout
+B2B Sales Dashboard
+Table-based inventory management
+Multi-select vehicle system
+Vehicle filtering
+Internal sales workflow structure
+Planned PDF export system
+
+
+Frontend
+Backend
+Database
+React
+Spring Boot
+PostgreSQL
+React Router
+Java
+SQL
+CSS
+REST API
+Relational schema
+
+
+
+
+Architecture
+
+Shared custom React hook (useVehiculos)
+Separate B2B / B2C views
+Reusable vehicle data flow
+REST API integration
+PostgreSQL relational database design
+
+Database Design
+
+Custom PostgreSQL database schema designed and implemented manually for:
+vehicle inventory
+VIN management
+pricing
+locations
+reservation status
+vehicle metadata
+Includes:
+unique VIN constraints
+relational structure
+SQL initialization scripts
+
+Future Improvements
+
+PDF export for B2B reports
+Authentication system
+Image uploads
+Pagination
+Advanced filtering
+Admin dashboard
+
+Screenshots
+
+
+Running the Project
+
+Frontend
+npm install
+npm start
+Backend
+./mvnw spring-boot:run
+
+
 ---
 
-# Estructura del proyecto
+# Author
 
-## Backend
+Created by in/melisa-speranza
 
-Carpeta:
-
-vehiculos-backend
-
-Tecnologías:
-
-- Java
-- Spring Boot
-- REST API
-
-Endpoints principales:
-
-GET /vehiculos  
-→ Devuelve todos los vehículos en formato JSON.
-
-Extensión posible:
-
-GET /vehiculos/{vin}  
-→ Devuelve el detalle de un vehículo (actualmente el filtrado se realiza en el frontend).
-
-DTO:
-
-Cada vehículo se representa mediante un objeto JSON proveniente de la clase:
-
-VehiculoDTO
-
-Branch / tag:
-
-v1.0
-
----
-
-## Frontend
-
-Carpeta:
-
-vehiculos-frontend
-
-Tecnologías:
-
+Full stack developer focused on:
 - React
-- React Router
-- Fetch API
+- Java / Spring Boot
+- PostgreSQL
+- Business workflow applications
+- Digital tools for real-world operations
 
-Componentes principales:
-
-VehiculosList.js  
-→ Lista los vehículos, permite aplicar filtros y generar informe imprimible.
-
-VehiculoDetalle.js  
-→ Muestra el detalle completo de un vehículo.
-
-Estado en React:
-
-Se utiliza **useState** para manejar:
-
-- modeloFiltro
-- paisFiltro
-- precioMaxFiltro
-- anoMinFiltro
-- búsqueda general (search)
-
-La lista de vehículos se carga desde el backend y se guarda en:
-
-vehiculos
-
-Branch / tag:
-
-v1.2
-
----
-
-# Funcionalidades
-
-## Listado y filtros
-
-Visualización de todos los vehículos en formato tabla.
-
-Filtros disponibles:
-
-- Modelo Indie
-- País
-- Precio máximo
-- Año mínimo
-
-También incluye:
-
-Búsqueda global por **VIN o matrícula**.
-
----
-
-## Detalle de vehículo
-
-Al hacer clic en el **VIN** se abre la página de detalle.
-
-Información mostrada:
-
-- VIN
-- Matrícula
-- Modelo
-- Chasis
-- Transmisión
-- Kilometraje
-- Año
-- País actual
-- Precio
-- Imagen del vehículo
-
-Las imágenes incluyen **fallback automático** si la miniatura no carga.
-
----
-
-## Informe imprimible
-
-La aplicación permite generar un **informe imprimible**.
-
-Características:
-
-- Solo incluye los vehículos que cumplen los filtros activos
-- Formato de tabla listo para enviar a clientes
-- Puede usarse como informe de ventas
-
----
-
-# Detalles técnicos
-
-- Cada fila de la tabla tiene un **key único** para evitar warnings de React.
-- Las imágenes incluyen **onError fallback** a placeholder si la miniatura falla.
-- Los datos se cargan desde una **API REST en Spring Boot**.
-
----
-
-# Cómo ejecutar el proyecto
-
-## Backend
-
-```bash
-cd vehiculos-backend
-mvn spring-boot:run
-
-## Screenshots
-
-### Vehicle List
-![Vehicle list](screenshots/vehiculo-list.png)
-<p align="center">
-  <img src="screenshots/vehicle-list.png" width="800">
-</p>
-
-
-### Filters
-![Filters](screenshots/vehiculo-filters.png)
-<p align="center">
-  <img src="screenshots/vehicle-filters.png" width="800">
-</p>
-
-### Vehicle Detail
-![Vehicle detail](screenshots/vehiculo-detail.png)
-<p align="center">
-  <img src="screenshots/vehicle-detail.png" width="800">
-</p>
+Barcelona, Spain
