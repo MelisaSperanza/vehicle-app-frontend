@@ -1,34 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import VehiculoCard from "../components/VehiculoCard";
+import useVehiculos from "../hooks/useVehiculos";
 
 function VehiculosListB2C() {
-  const [vehiculos, setVehiculos] = useState([]);
+
+  const { vehiculos, error, loading } = useVehiculos();
+
   const [search, setSearch] = useState("");
-  const [error, setError] = useState(null);
-  const [selectedVehicles, setSelectedVehicles] = useState([]);
 
-  useEffect(() => {
-    fetch("http://localhost:8080/vehiculos")
-      .then((res) => {
-        if (!res.ok) throw new Error("Error al cargar vehículos");
-        return res.json();
-      })
-      .then((data) => {
-        setVehiculos(data);
-      })
-      .catch((err) => {
-        setError(err.message);
-      });
-  }, []);
+  const busqueda = search.toLowerCase();
 
-  const vehiculosFiltrados = vehiculos.filter((v) => {
-    const busqueda = search.toLowerCase();
+  const vehiculosFiltrados = vehiculos.filter((vehiculo) => {
 
     return (
-      v.indieVehicleModel?.toLowerCase().includes(busqueda) ||
-      v.licensePlate?.toLowerCase().includes(busqueda)
+      vehiculo.indieVehicleModel?.toLowerCase().includes(busqueda) ||
+      vehiculo.licensePlate?.toLowerCase().includes(busqueda)
     );
+
   });
+
+  const vehiculosOrdenados = [...vehiculosFiltrados].sort((a, b) =>
+    a.indieVehicleModel.localeCompare(b.indieVehicleModel)
+  );
 
   const styles = {
     grid: {
@@ -39,11 +32,19 @@ function VehiculosListB2C() {
     },
   };
 
-  return (
-    <div>
-      <h1>Marketplace Vehículos</h1>
+  if (loading) {
+    return <p>Cargando vehículos...</p>;
+  }
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+  if (error) {
+    return <p>{error}</p>;
+  }
+
+  return (
+
+    <div>
+
+      <h1>Marketplace Vehículos</h1>
 
       <input
         type="text"
@@ -52,16 +53,19 @@ function VehiculosListB2C() {
         onChange={(e) => setSearch(e.target.value)}
       />
 
-   
+      <div style={styles.grid}>
 
-       <div style={styles.grid}>
-  {vehiculosOrdenados.map((vehiculo) => (
-    <VehiculoCard
-      key={vehiculo.vin}
-      vehiculo={vehiculo}
-    />
-  ))}
-</div>
+        {vehiculosOrdenados.map((vehiculo) => (
+
+          <VehiculoCard
+            key={vehiculo.vin}
+            vehiculo={vehiculo}
+          />
+
+        ))}
+
+      </div>
+
     </div>
   );
 }
