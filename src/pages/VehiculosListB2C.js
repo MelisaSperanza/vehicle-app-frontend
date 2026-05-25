@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import VehiculoCard from "../components/VehiculoCard";
 import useVehiculos from "../hooks/useVehiculos";
+import "./General.css";
+import "./Grids.css";
 
 function VehiculosListB2C() {
 
@@ -23,37 +25,37 @@ function VehiculosListB2C() {
     a.indieVehicleModel.localeCompare(b.indieVehicleModel)
   );
 
-  const styles = {
+  /*const styles = {
     grid: {
       display: "grid",
       gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
       gap: "16px",
       marginTop: "16px",
     },
-  };
+  };*/
 
   if (loading) {
-    return <p>Cargando vehículos...</p>;
+    return <p className= "vehiculos-general-body h2">Cargando vehículos...</p>;
   }
 
   if (error) {
-    return <p>{error}</p>;
+    return <p className= "vehiculos-general-body h2">{error}</p>;
   }
 
   return (
 
-    <div>
+    <div className= "vehiculos-general-body">
 
-      <h1>Marketplace Vehículos</h1>
+      <h1 className= "vehiculos-general-body h1">Marketplace Vehículos</h1>
 
-      <input
+      <input className = "vehiculos-general-body input"
         type="text"
         placeholder="Buscar vehículo..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
 
-      <div style={styles.grid}>
+      <div className="vehiculos-grid">
 
         {vehiculosOrdenados.map((vehiculo) => (
 

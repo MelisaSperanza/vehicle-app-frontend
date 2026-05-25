@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import useVehiculos from "../hooks/useVehiculos";
-import "./VehiculosListB2B.css";
+import "./Tables.css";
+import "./General.css";
 
 function VehiculosListB2B() {
 
@@ -32,11 +33,11 @@ function VehiculosListB2B() {
   };
   return (
 
-    <div>
+    <div className="vehiculos-general-body">
 
-      <h1>B2B Vehículos</h1>
+      <h1 className="vehiculos-general-body h1">B2B Vehículos</h1>
 
-      <p>Total vehículos: {vehiculos.length}</p>
+      <p className="vehiculos-general-body h2">Total vehículos: {vehiculos.length}</p>
 
      <table className="vehiculos-table">
 

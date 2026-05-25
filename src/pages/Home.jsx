@@ -1,23 +1,25 @@
 import { Link } from "react-router-dom";
+import "./General.css";
+import "./Home.css";
 
 function Home() {
 
   return (
 
-    <div>
+    <div className= "vehiculos-general-body">
 
-      <h1>Vehicle Platform</h1>
+      <h1>Vehicle Sales Platform</h1>
 
-      <div>
+      <div className= "home-buttons">
 
         <Link to="/VehiculosListB2C">
-          <button>
+          <button className="home-button">
             B2C Marketplace
           </button>
         </Link>
 
         <Link to="/VehiculosListB2B">
-          <button>
+          <button className="home-button">
             B2B Sales Portal
           </button>
         </Link>
