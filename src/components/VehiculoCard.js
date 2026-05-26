@@ -1,10 +1,24 @@
+import React from "react";
+
 function VehiculoCard({ vehiculo }) {
   return (
     <article style={styles.card}>
+      
+    <div style={styles.card}>
       <div style={styles.image}>
-        🚐
+        <img
+          src={vehiculo.image}
+          alt={vehiculo.nombre}
+          style={styles.imageTag}
+        />
       </div>
 
+      <div style={styles.content}>
+        <h3>{vehiculo.nombre}</h3>
+        <p>{vehiculo.precio}</p>
+      </div>
+    </div>
+  
       <div style={styles.body}>
         <h2 style={styles.title}>
           {vehiculo.indieVehicleModel}
@@ -37,6 +51,14 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     fontSize: "32px",
+    overflow: "hidden",
+    borderTopLeftRadius: "12px",
+    borderTopRightRadius: "12px",
+  },
+  imageTag: {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
   },
   body: {
     padding: "12px",
