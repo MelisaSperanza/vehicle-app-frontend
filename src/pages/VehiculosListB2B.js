@@ -9,11 +9,44 @@ function VehiculosListB2B() {
   const { vehiculos, error } = useVehiculos();
   const [selectedVehicles, setSelectedVehicles] = useState([]);
 
+  const [filters, setFilters] = useState({
+  vin: "",
+  licensePlate: "",
+  chassisModel: "",
+  transmission: "",
+  currentLocation: "",
+  currentCountry: "",
+  registrationCountry: "",
+  modelYear: "",
+  kms: "",
+  livePriceEurInclVat: "",
+  reservationStatus: ""
+});
   console.log(vehiculos);
 
   if (error) {
     return <p>{error}</p>;
   }
+  
+
+const handleFilterChange = (e) => {
+  setFilters({
+    ...filters,
+    [e.target.name]: e.target.value
+  });
+};
+
+const filteredVehiculos = vehiculos.filter((vehiculo) => {
+
+  return Object.keys(filters).every((key) => {
+
+    return String(vehiculo[key] ?? "")
+      .toLowerCase()
+      .includes(filters[key].toLowerCase());
+
+  });
+
+});
 
   const handleSelectAll = (e) => {
 
@@ -99,6 +132,52 @@ function VehiculosListB2B() {
         Descargar PDF ({selectedVehicles.length})
       </button>
 
+
+<div className="filters-container">
+
+  <input
+    type="text"
+    name="vin"
+    placeholder="Filtrar VIN"
+    value={filters.vin}
+    onChange={handleFilterChange}
+  />
+
+  <input
+    type="text"
+    name="chassisModel"
+    placeholder="Modelo"
+    value={filters.chassisModel}
+    onChange={handleFilterChange}
+  />
+
+  <input
+    type="text"
+    name="transmission"
+    placeholder="Transmisión"
+    value={filters.transmission}
+    onChange={handleFilterChange}
+  />
+
+  <input
+    type="text"
+    name="currentCountry"
+    placeholder="País actual"
+    value={filters.currentCountry}
+    onChange={handleFilterChange}
+  />
+
+  <input
+    type="text"
+    name="reservationStatus"
+    placeholder="Estado reserva"
+    value={filters.reservationStatus}
+    onChange={handleFilterChange}
+  />
+
+</div>
+
+
      <table className="vehiculos-table">
 
         <thead>
@@ -132,7 +211,7 @@ function VehiculosListB2B() {
    
 <tbody>
        
-        {vehiculos.map((vehiculo) => (
+        {filteredVehiculos.map((vehiculo) => (
 
           <tr key={vehiculo.vin}>
 
