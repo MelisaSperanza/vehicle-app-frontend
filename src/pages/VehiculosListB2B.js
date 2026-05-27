@@ -35,37 +35,54 @@ function VehiculosListB2B() {
     const handleDownloadPDF = () => {
       const doc = new jsPDF();
 
-      doc.setFontSize(16);
-      doc.text("Listado de Vehículos seleccionados", 10, 10);
+      const logo = new Image();
+      logo.src = "/LogoIndie.png";
 
-      let y = 20;
+      const logoWidth=30;
+      const logoHeight=10;
+      const logoMargin=10;
+      const pageWidth = doc.internal.pageSize.getWidth();
 
-      const selectedData = vehiculos.filter(v =>
-        selectedVehicles.includes(v.vin)
-      );
+      logo.onload = () => {
 
-      selectedData.forEach((v, index) => {
-        doc.setFontSize(10);
+        doc.addImage(logo, "PNG", pageWidth - logoWidth - logoMargin, //posición X dinámica
+         logoMargin,//posición Y
+         logoWidth,
+         logoHeight);
 
-        doc.text(
-          `${index + 1}. VIN: ${v.vin} | Modelo: ${v.chassisModel} | KM: ${v.kms} | Precio: €${v.livePriceEurInclVat}`,
-          10,
-          y
+
+        doc.setFontSize(16);
+        doc.text("Listado de Vehículos seleccionados", 10, 20);
+
+        let y = 30;
+
+        const selectedData = vehiculos.filter(v =>
+          selectedVehicles.includes(v.vin)
         );
 
-        y += 10;
+        selectedData.forEach((v, index) => {
+          doc.setFontSize(10);
 
-        // salto de página si se llena
-        if (y > 280) {
-          doc.addPage();
-          y = 10;
-        }
-      });
+          doc.text(
+            `${index + 1}. VIN: ${v.vin} | Modelo: ${v.chassisModel} | KM: ${v.kms} | Precio: €${v.livePriceEurInclVat}`,
+            10,
+            y
+          );
 
-      doc.save("vehiculos-seleccionados.pdf");
-    };
+          y += 10;
 
-  
+          // salto de página si se llena
+          if (y > 280) {
+            doc.addPage();
+            y = 10;
+          }
+        });
+
+        doc.save("vehiculos-seleccionados.pdf");
+      };
+
+  } 
+
   return (
 
     <div className="vehiculos-general-body">
