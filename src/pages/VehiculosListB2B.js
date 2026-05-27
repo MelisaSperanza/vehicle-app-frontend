@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import useVehiculos from "../hooks/useVehiculos";
 import "./Tables.css";
 import "./General.css";
+import jsPDF from "jspdf";
 
 function VehiculosListB2B() {
 
@@ -28,9 +29,43 @@ function VehiculosListB2B() {
 
       setSelectedVehicles([]);
 
-    }
+    }};
 
-  };
+    //reporte descargable en pdf
+    const handleDownloadPDF = () => {
+      const doc = new jsPDF();
+
+      doc.setFontSize(16);
+      doc.text("Listado de Vehículos seleccionados", 10, 10);
+
+      let y = 20;
+
+      const selectedData = vehiculos.filter(v =>
+        selectedVehicles.includes(v.vin)
+      );
+
+      selectedData.forEach((v, index) => {
+        doc.setFontSize(10);
+
+        doc.text(
+          `${index + 1}. VIN: ${v.vin} | Modelo: ${v.chassisModel} | KM: ${v.kms} | Precio: €${v.livePriceEurInclVat}`,
+          10,
+          y
+        );
+
+        y += 10;
+
+        // salto de página si se llena
+        if (y > 280) {
+          doc.addPage();
+          y = 10;
+        }
+      });
+
+      doc.save("vehiculos-seleccionados.pdf");
+    };
+
+  
   return (
 
     <div className="vehiculos-general-body">
@@ -38,6 +73,14 @@ function VehiculosListB2B() {
       <h1 className="vehiculos-general-body h1">B2B Vehículos</h1>
 
       <p className="vehiculos-general-body h2">Total vehículos: {vehiculos.length}</p>
+
+      <button
+        onClick={handleDownloadPDF}
+        disabled={selectedVehicles.length === 0}
+        className="home-button"
+      >
+        Descargar PDF ({selectedVehicles.length})
+      </button>
 
      <table className="vehiculos-table">
 

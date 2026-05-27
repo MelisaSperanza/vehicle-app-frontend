@@ -8,6 +8,7 @@
 
 .vehiculos-general-body h1 {
     color: #123456;
+    width: 100%;
     text-align: center;
     background-color: #96a9f5;
     font-weight: bold;
