@@ -8,7 +8,7 @@ function useVehiculos() {
 
   useEffect(() => {
 
-    fetch("http://localhost:8080/vehiculos")
+    fetch("https://vehiculos-backend-5bli.onrender.com")
 
       .then((res) => {
 
