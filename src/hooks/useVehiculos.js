@@ -8,7 +8,7 @@ function useVehiculos() {
 
   useEffect(() => {
 
-    fetch("https://vehiculos-backend-5bli.onrender.com")
+    fetch("https://vehiculos-backend-5bli.onrender.com/api/vehiculos")
 
       .then((res) => {
 
