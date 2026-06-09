@@ -8,8 +8,8 @@ function useVehiculos() {
 
   useEffect(() => {
 
-    fetch("https://vehiculos-backend-5bli.onrender.com/api/vehiculos")
-
+    fetch("/api/vehiculos")
+    //fetch("https://vehiculos-backend-5bli.onrender.com/api/vehiculos")
       .then((res) => {
 
         if (!res.ok) {

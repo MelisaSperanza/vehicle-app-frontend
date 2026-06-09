@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8080/vehiculos"; // tu backend
+const BASE_URL = "http://localhost:3000/vehiculos"; //  backend
 
 export async function obtenerVehiculos() {
   const response = await fetch(BASE_URL);
