@@ -6,13 +6,14 @@ import { getVehiculoByVin } from "../services/vehiculosApi";
 function VehiculoDetalle() {
 
   const { vin } = useParams();
+  const BASE_URL = `${process.env.REACT_APP_API_URL}/vehiculos`;
 
   const [vehiculo, setVehiculo] = useState(null);
   const [error, setError] = useState(null);
 
-  //useEffect inicial - borrar está en git
-/*  useEffect(() => {
-    fetch("http://localhost:8080/vehiculos")
+  //useEffect inicial
+useEffect(() => {
+    fetch("BASE_URL")
       .then(res => {
         if (!res.ok) throw new Error("Error al cargar vehículos");
         return res.json();
@@ -31,7 +32,7 @@ function VehiculoDetalle() {
       });
       
   }, [vin]);
-*/
+
 useEffect(() => {
 
   getVehiculoByVin(vin)

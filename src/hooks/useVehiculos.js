@@ -7,9 +7,10 @@ function useVehiculos() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-
+console.log(process.env.REACT_APP_API_URL);
     //fetch("/api/vehiculos")
-    fetch("https://vehiculos-backend-rx13.onrender.com/api/vehiculos")
+    //fetch("https://vehiculos-backend-rx13.onrender.com/api/vehiculos")
+    fetch(`${process.env.REACT_APP_API_URL}/api/vehiculos`)
       .then((res) => {
 
         if (!res.ok) {
