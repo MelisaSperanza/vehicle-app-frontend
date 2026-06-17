@@ -8,12 +8,17 @@ function useVehiculos() {
 
   useEffect(() => {
 
-    console.log("VEHICULOS RESPONSE:", data);
-    
+      const fetchVehiculos = async () => {
+    try {
+     // const res = await fetch(`${API_URL}/api/vehiculos`);
+      const res = await fetch ("https://vehiculos-backend-rx13.onrender.com/api/vehiculos");
+      const data = await res.json();
+
     //fetch("/api/vehiculos")
-    fetch("https://vehiculos-backend-rx13.onrender.com/api/vehiculos")
+    //fetch("https://vehiculos-backend-rx13.onrender.com/api/vehiculos")
     //fetch(`${process.env.REACT_APP_API_URL}/api/vehiculos`)
-      .then((res) => {
+
+      /*.then((res) => {
 
         if (!res.ok) {
           throw new Error("Error al cargar vehículos");
@@ -30,8 +35,16 @@ function useVehiculos() {
       .catch((err) => {
         setError(err.message);
         setLoading(false);
-      });
+      });*/
 
+
+      setVehiculos(data);
+} catch (error) {
+  console.error("Error fetching vehiculos:", error);
+}
+      };
+
+      fetchVehiculos();
   }, []);
 
   return {
@@ -42,3 +55,5 @@ function useVehiculos() {
 }
 
 export default useVehiculos;
+
+
