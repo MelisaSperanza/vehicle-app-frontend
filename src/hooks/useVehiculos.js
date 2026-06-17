@@ -7,6 +7,9 @@ function useVehiculos() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+
+    console.log("VEHICULOS RESPONSE:", data);
+    
     //fetch("/api/vehiculos")
     fetch("https://vehiculos-backend-rx13.onrender.com/api/vehiculos")
     //fetch(`${process.env.REACT_APP_API_URL}/api/vehiculos`)
