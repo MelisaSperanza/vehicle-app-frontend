@@ -1,37 +1,33 @@
 import React from "react";
 
 function VehiculoCard({ vehiculo }) {
+  if (!vehiculo) return null;
+
   return (
     <article style={styles.card}>
       
-    <div style={styles.card}>
       <div style={styles.image}>
         <img
           src={vehiculo.thumbnailUrl}
-          alt={vehiculo.indieVehicleModel}
-          style="vehiculo-card-image"
+          alt={vehiculo.indieVehicleModel || "vehiculo"}
+          className="vehiculo-card-image"
         />
       </div>
 
-      <div style={styles.content}>
-        <h3>{vehiculo.nombre}</h3>
-        <p>{vehiculo.precio}</p>
-      </div>
-    </div>
-  
       <div style={styles.body}>
         <h2 style={styles.title}>
-          {vehiculo.indieVehicleModel}
+          {vehiculo.indieVehicleModel ?? "Sin modelo"}
         </h2>
 
         <p style={styles.price}>
-          {vehiculo.livePriceEurInclVat} € IVA incluido
+          {vehiculo.livePriceEurInclVat ?? 0} € IVA incluido
         </p>
 
         <p style={styles.meta}>
           {vehiculo.currentLocation || "Ubicación no disponible"}
         </p>
       </div>
+
     </article>
   );
 }
