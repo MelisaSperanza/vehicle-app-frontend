@@ -7,9 +7,9 @@ function VehiculoCard({ vehiculo }) {
     <div style={styles.card}>
       <div style={styles.image}>
         <img
-          src={vehiculo.image}
-          alt={vehiculo.nombre}
-          style={styles.imageTag}
+          src={vehiculo.thumbnailUrl}
+          alt={vehiculo.indieVehicleModel}
+          style="vehiculo-card-image"
         />
       </div>
 

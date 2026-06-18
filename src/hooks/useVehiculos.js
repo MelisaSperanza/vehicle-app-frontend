@@ -6,46 +6,43 @@ function useVehiculos() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+useEffect(() => {
 
-      const fetchVehiculos = async () => {
+  const fetchVehiculos = async () => {
+
     try {
-     // const res = await fetch(`${API_URL}/api/vehiculos`);
-      const res = await fetch ("https://vehiculos-backend-rx13.onrender.com/api/vehiculos");
+
+      const res = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/vehiculos`
+      );
+
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}`);
+      }
+
       const data = await res.json();
 
-    //fetch("/api/vehiculos")
-    //fetch("https://vehiculos-backend-rx13.onrender.com/api/vehiculos")
-    //fetch(`${process.env.REACT_APP_API_URL}/api/vehiculos`)
-
-      /*.then((res) => {
-
-        if (!res.ok) {
-          throw new Error("Error al cargar vehículos");
-        }
-
-        return res.json();
-      })
-
-      .then((data) => {
-        setVehiculos(data);
-        setLoading(false);
-      })
-
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });*/
-
+      console.log("Vehículos recibidos:", data);
 
       setVehiculos(data);
-} catch (error) {
-  console.error("Error fetching vehiculos:", error);
-}
-      };
 
-      fetchVehiculos();
-  }, []);
+    } catch (error) {
+
+      console.error("Error fetching vehiculos:", error);
+
+      setError(error.message);
+
+    } finally {
+
+      setLoading(false);
+
+    }
+
+  };
+
+  fetchVehiculos();
+
+}, []);
 
   return {
     vehiculos,

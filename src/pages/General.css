@@ -43,6 +43,25 @@
   box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.25);
 }
 
+.vehiculo-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.vehiculo-card:hover {
+  transform: translateY(-4px);
+}
+
+.vehiculo-card-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
 .filters-container {
   display: flex;
   flex-wrap: wrap;
