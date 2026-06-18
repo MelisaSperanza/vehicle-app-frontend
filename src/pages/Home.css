@@ -1,3 +1,9 @@
+.home-background {
+background-color: #f0f8ff;
+min-height: 100vh;
+
+}
+
 .home-header {
   display: flex;
   align-items: center;

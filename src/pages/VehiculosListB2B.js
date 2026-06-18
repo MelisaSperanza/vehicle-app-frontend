@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import useVehiculos from "../hooks/useVehiculos";
 import "./Tables.css";
 import "./General.css";
+import "./ProgressBar.css";
 import jsPDF from "jspdf";
 
 function VehiculosListB2B() {
 
-  const { vehiculos, error } = useVehiculos();
+  const { vehiculos, loading, error } = useVehiculos();
   const [selectedVehicles, setSelectedVehicles] = useState([]);
 
   const [filters, setFilters] = useState({
@@ -23,6 +24,10 @@ function VehiculosListB2B() {
   reservationStatus: ""
 });
   console.log(vehiculos);
+
+if (loading) {
+  return <div classname="progress-bar"></div>
+}
 
   if (error) {
     return <p>{error}</p>;

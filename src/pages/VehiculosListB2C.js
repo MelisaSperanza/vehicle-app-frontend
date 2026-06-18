@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import VehiculoCard from "../components/VehiculoCard";
+import VehicleSkeleton from "../components/VehiculoSkeleton";
 import useVehiculos from "../hooks/useVehiculos";
 import "./General.css";
 import "./Grids.css";
@@ -35,7 +36,9 @@ function VehiculosListB2C() {
   };*/
 
   if (loading) {
-    return <p className= "vehiculos-general-body h2">Cargando vehículos...</p>;
+    //return <p className= "vehiculos-general-body h2">Cargando vehículos...</p>;
+     return <VehicleSkeleton />;
+
   }
 
   if (error) {

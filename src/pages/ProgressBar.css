@@ -1,0 +1,25 @@
+.progress-bar {
+  height: 4px;
+  width: 100%;
+  overflow: hidden;
+  background: #eee;
+  position: relative;
+}
+
+.progress-bar::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 30%;
+  background: #007bff;
+  animation: loading 1.2s infinite;
+}
+
+@keyframes loading {
+  from {
+    left: -30%;
+  }
+  to {
+    left: 100%;
+  }
+}
