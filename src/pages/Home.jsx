@@ -33,9 +33,32 @@ function Home() {
 
   return (
 
-    <div className= "vehiculos-general-body">
+    <div>
+    
 
-      <h1>Vehicle Sales Platform</h1>
+      <div className="home-header">
+
+  <h1 className="home-title">
+    Vehicle Sales Platform
+  </h1>
+
+  <div className="home-header-right">
+
+    <img
+      src="/your-logo-here.png"
+      alt="Logo"
+      className="home-logo"
+    />
+
+    <img
+      src="/userIcon.png"
+      alt="User"
+      className="home-user-icon"
+    />
+
+  </div>
+
+</div>
 
       <div className= "home-buttons">
 

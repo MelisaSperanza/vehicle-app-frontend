@@ -1,3 +1,41 @@
+.home-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+}
+
+.home-title {
+  margin: 0;
+  text-align: left;
+  font-size: 28px;
+  font-weight: 600;
+  font-family: Arial, sans-serif;
+  color: #123456;
+}
+
+.home-header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.home-logo {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
+.home-user-icon {
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  background: #f5f5f5;
+}
+
 .home-buttons {
     display: flex;
     gap: 20px;
@@ -16,6 +54,7 @@
     font-size: 16px;
     cursor: pointer;
     transition: 0.2s;
+    font-family: Arial, sans-serif;
 }
 
 .home-button:hover {
